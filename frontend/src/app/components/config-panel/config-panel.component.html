@@ -1,0 +1,22 @@
+<div class="config-panel">
+  <h2>Configuração</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="points">Pontos</label>
+      <input type="number" id="points" name="points" [(ngModel)]="points" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="generations">Gerações</label>
+      <input type="number" id="generations" name="generations" [(ngModel)]="generations" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="vehicles">Veículos</label>
+      <input type="number" id="vehicles" name="vehicles" [(ngModel)]="vehicles" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="speed_kmh">Velocidade (km/h)</label>
+      <input type="number" id="speed_kmh" name="speed_kmh" [(ngModel)]="speed_kmh" required min="1">
+    </div>
+    <button type="submit" class="btn-primary">Iniciar Otimização</button>
+  </form>
+</div>
