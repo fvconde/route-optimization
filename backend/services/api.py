@@ -1,7 +1,33 @@
 from fastapi import APIRouter
+from ga import run_ga
+from tsp import generate_points
+from pydantic import BaseModel
 
-router = APIRouter(prefix="/api", tags=["api"])
+class OptimizeRequest(BaseModel):
+    points: int = 20
+    generations: int = 100
+    vehicles: int = 1
+    speed_kmh: float = 60
 
-@router.get("/ping")
-def ping():
-    return {"message": "pong"}
+router = APIRouter()
+
+@router.post("/optimize")
+def optimize(data: OptimizeRequest):
+    points = generate_points(data.points)
+
+    routes, history, dist = run_ga(
+        points,
+        generations=data.generations,
+        vehicles=data.vehicles,
+        speed_kmh=data.speed_kmh
+    )
+    
+    time_hours = dist / data.speed_kmh
+
+    return {
+        "routes": [[p["id"] for p in route] for route in routes],
+        "fitness_history": history,
+        "total_distance": dist,
+        "estimated_time_h": round(time_hours, 2),
+        "points": points
+    }
