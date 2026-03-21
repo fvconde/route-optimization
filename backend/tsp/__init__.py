@@ -3,15 +3,21 @@ import math
 
 
 def generate_points(n):
-	return [
-		{
-			"id": i,
-			"x": random.uniform(0, 100),
-			"y": random.uniform(0, 100),
-			"priority": random.randint(1, 3)
-		}
-		for i in range(n)
-	]
+    points = []
+    points.append({
+        "id": 0,
+        "x": 50.0,
+        "y": 50.0,
+        "priority": 0
+    })
+    for i in range(1, n):
+        points.append({
+            "id": i,
+            "x": random.uniform(0, 100),
+            "y": random.uniform(0, 100),
+            "priority": random.randint(1, 3)
+        })
+    return points
 
 
 def distance(a, b):
