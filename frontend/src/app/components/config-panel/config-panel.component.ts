@@ -15,6 +15,8 @@ export class ConfigPanelComponent {
   generations: number = 100;
   vehicles: number = 1;
   speed_kmh: number = 60;
+  max_capacity: number = 100;
+  max_distance: number = 300;
 
   @Output() optimize = new EventEmitter<OptimizeRequest>();
 
@@ -23,7 +25,9 @@ export class ConfigPanelComponent {
       points: this.points,
       generations: this.generations,
       vehicles: this.vehicles,
-      speed_kmh: this.speed_kmh
+      speed_kmh: this.speed_kmh,
+      max_capacity: this.max_capacity,
+      max_distance: this.max_distance
     });
   }
 }
