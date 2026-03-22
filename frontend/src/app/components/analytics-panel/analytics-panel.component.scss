@@ -1,0 +1,76 @@
+.panel {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #eee;
+
+  &.highlight {
+    background: rgba(0, 123, 255, 0.05);
+    border-color: rgba(0, 123, 255, 0.2);
+    
+    .value {
+      color: #0056b3;
+    }
+  }
+
+  .label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .value {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.insight-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #e3f2fd;
+  color: #0d47a1;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #1565c0;
+
+  .icon {
+    font-size: 1.5rem;
+  }
+
+  .text {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+}

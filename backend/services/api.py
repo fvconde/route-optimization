@@ -2,6 +2,8 @@ from fastapi import APIRouter
 from ga import run_ga
 from tsp import generate_points
 from pydantic import BaseModel
+from services.llm_service import generate_report
+from fastapi import HTTPException
 
 class OptimizeRequest(BaseModel):
     points: int = 20
@@ -31,3 +33,11 @@ def optimize(data: OptimizeRequest):
         "estimated_time_h": round(time_hours, 2),
         "points": points
     }
+
+@router.post("/report")
+def report(data: dict):
+    try:
+        text = generate_report(data)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    return {"report": text}

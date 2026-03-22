@@ -15,4 +15,8 @@ export class ApiService {
   optimize(data: OptimizeRequest): Observable<OptimizeResponse> {
     return this.http.post<OptimizeResponse>(`${this.baseUrl}/optimize`, data);
   }
+
+  generateReport(data: any): Observable<{report: string}> {
+    return this.http.post<{report: string}>(`${this.baseUrl}/report`, data);
+  }
 }
