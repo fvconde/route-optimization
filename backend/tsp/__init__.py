@@ -8,14 +8,16 @@ def generate_points(n):
         "id": 0,
         "x": 50.0,
         "y": 50.0,
-        "priority": 0
+        "priority": 0,
+        "demand": 0
     })
     for i in range(1, n):
         points.append({
             "id": i,
             "x": random.uniform(0, 100),
             "y": random.uniform(0, 100),
-            "priority": random.randint(1, 3)
+            "priority": random.randint(1, 3),
+            "demand": random.randint(10, 50)
         })
     return points
 

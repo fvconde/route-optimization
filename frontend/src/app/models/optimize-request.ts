@@ -3,4 +3,6 @@ export interface OptimizeRequest {
   generations: number;
   vehicles: number;
   speed_kmh: number;
+  max_capacity: number;
+  max_distance: number;
 }

@@ -10,6 +10,8 @@ class OptimizeRequest(BaseModel):
     generations: int = 100
     vehicles: int = 1
     speed_kmh: float = 60
+    max_capacity: int = 100
+    max_distance: int = 300
 
 router = APIRouter()
 
@@ -21,7 +23,9 @@ def optimize(data: OptimizeRequest):
         points,
         generations=data.generations,
         vehicles=data.vehicles,
-        speed_kmh=data.speed_kmh
+        speed_kmh=data.speed_kmh,
+        max_capacity=data.max_capacity,
+        max_distance=data.max_distance
     )
     
     time_hours = dist / data.speed_kmh
