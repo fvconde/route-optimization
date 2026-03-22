@@ -1,0 +1,35 @@
+<div class="panel">
+  <h2>Comparação de Desempenho</h2>
+  <p class="description">Compare o resultado do algoritmo genético otimizado com rotas geradas aleatoriamente e por uma heurística construtiva simples (Vizinho Mais Próximo).</p>
+  
+  <div class="actions">
+    <button class="btn-primary" (click)="runComparison()" [disabled]="!request">
+      Executar Comparação
+    </button>
+  </div>
+
+  <div class="results-area" *ngIf="hasRun">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Algoritmo</th>
+            <th>Distância Total (km)</th>
+            <th>Tempo Estimado (h)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let res of results" [class.highlight]="res.algorithm === 'Genético'">
+            <td>{{ res.algorithm }}</td>
+            <td>{{ res.distance | number:'1.2-2' }}</td>
+            <td>{{ res.time | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top:2rem;">
+      <canvas #comparisonChart></canvas>
+    </div>
+  </div>
+</div>

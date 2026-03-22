@@ -18,12 +18,45 @@
     </aside>
 
     <main class="content-area">
-      <app-results-panel [result]="result"></app-results-panel>
-      
-      <div class="visuals" *ngIf="result">
-        <app-chart [fitnessHistory]="result.fitness_history"></app-chart>
-        <app-map [points]="result.points" [routes]="result.routes"></app-map>
+      <nav class="tabs">
+        <button [class.active]="activeTab === 'resultado'" (click)="activeTab = 'resultado'">Resultado</button>
+        <button [class.active]="activeTab === 'comparacao'" (click)="activeTab = 'comparacao'">Comparação</button>
+        <button [class.active]="activeTab === 'experimentos'" (click)="activeTab = 'experimentos'">Experimentos</button>
+        <button [class.active]="activeTab === 'analise'" (click)="activeTab = 'analise'">Análise</button>
+        <button [class.active]="activeTab === 'relatorio'" (click)="activeTab = 'relatorio'">Relatório</button>
+      </nav>
+
+      <div class="tab-content" *ngIf="result; else noData">
+        <div *ngIf="activeTab === 'resultado'">
+          <app-results-panel [result]="result"></app-results-panel>
+          <div class="visuals">
+            <app-chart [fitnessHistory]="result.fitness_history"></app-chart>
+            <app-map [points]="result.points" [routes]="result.routes"></app-map>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab === 'comparacao'">
+          <app-comparison-panel [request]="lastRequest" [result]="result"></app-comparison-panel>
+        </div>
+
+        <div *ngIf="activeTab === 'experimentos'">
+          <app-experiments-panel [request]="lastRequest"></app-experiments-panel>
+        </div>
+
+        <div *ngIf="activeTab === 'analise'">
+          <app-analytics-panel [result]="result"></app-analytics-panel>
+        </div>
+
+        <div *ngIf="activeTab === 'relatorio'">
+          <app-report-panel [result]="result"></app-report-panel>
+        </div>
       </div>
+
+      <ng-template #noData>
+        <div class="empty-state">
+          <p>Configure os parâmetros e clique em "Otimizar Rota" para ver os resultados.</p>
+        </div>
+      </ng-template>
     </main>
   </div>
 </div>

@@ -1,0 +1,28 @@
+<div class="panel">
+  <h2>Análise de Convergência</h2>
+  <p class="description">Visualize métricas detalhadas sobre o desempenho do algoritmo genético na busca pela melhor rota.</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="label">Melhor Custo (Distância)</span>
+      <span class="value">{{ bestFitness | number:'1.2-2' }} km</span>
+    </div>
+    <div class="metric-card">
+      <span class="label">Média de Custo</span>
+      <span class="value">{{ avgFitness | number:'1.2-2' }} km</span>
+    </div>
+    <div class="metric-card highlight">
+      <span class="label">Taxa de Melhoria</span>
+      <span class="value">{{ improvementPercent | number:'1.1-2' }}%</span>
+    </div>
+  </div>
+
+  <div class="insight-box" *ngIf="insightText">
+    <div class="icon">💡</div>
+    <div class="text">{{ insightText }}</div>
+  </div>
+
+  <div class="chart-container" style="position: relative; height:350px; width:100%; margin-top:2rem;">
+    <canvas #analyticsChart></canvas>
+  </div>
+</div>

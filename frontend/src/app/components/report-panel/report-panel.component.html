@@ -1,0 +1,21 @@
+<div class="panel">
+  <h2>Relatório de Operação</h2>
+  <p class="description">Gera um relatório automático descritivo sobre o percurso otimizado encontrado, com base em inteligência artificial (LLM).</p>
+  
+  <div class="actions">
+    <button class="btn-primary" (click)="generateReport()" [disabled]="!result || isGenerating">
+      <span *ngIf="!isGenerating">Gerar Relatório Inteligente</span>
+      <span *ngIf="isGenerating">Pensando...</span>
+    </button>
+  </div>
+
+  <div class="report-area" *ngIf="reportText">
+    <div class="report-text">
+      {{ reportText }}
+    </div>
+  </div>
+
+  <div class="error-slate" *ngIf="error" style="margin-top: 1rem;">
+    {{ error }}
+  </div>
+</div>
