@@ -10,44 +10,19 @@ interface ChatMessage {
 }
 
 @Component({
-  selector: 'app-report-panel',
-  standalone: true,
+  selector: 'app-chat-sidebar',
   imports: [CommonModule, FormsModule],
-  templateUrl: './report-panel.component.html',
-  styleUrl: './report-panel.component.scss'
+  templateUrl: './chat-sidebar.html',
+  styleUrl: './chat-sidebar.scss'
 })
-export class ReportPanelComponent {
+export class ChatSidebar {
   @Input() result: OptimizeResponse | null = null;
   
-  isGenerating = false;
-  reportText: string | null = null;
-  error: string | null = null;
-
   question: string = '';
   isAsking = false;
   chatHistory: ChatMessage[] = [];
 
   constructor(private apiService: ApiService) {}
-
-  generateReport() {
-    if (!this.result) return;
-    
-    this.isGenerating = true;
-    this.reportText = null;
-    this.error = null;
-
-    this.apiService.generateReport(this.result).subscribe({
-      next: (res) => {
-        this.reportText = res.report;
-        this.isGenerating = false;
-      },
-      error: (err) => {
-        console.error('Error generating report:', err);
-        this.error = 'Falha ao gerar o relatório. Verifique se a chave OPENAI_API_KEY está configurada no backend.';
-        this.isGenerating = false;
-      }
-    });
-  }
 
   askQuestion() {
     if (!this.result || !this.question.trim()) return;

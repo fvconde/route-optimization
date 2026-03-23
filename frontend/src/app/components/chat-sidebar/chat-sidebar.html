@@ -1,0 +1,40 @@
+<div class="chat-sidebar" *ngIf="result">
+  <div class="chat-header">
+    <h3>Co-piloto Logístico</h3>
+    <p>Pergunte sobre as rotas geradas.</p>
+  </div>
+
+  <div class="chat-body">
+    <div class="chat-history" *ngIf="chatHistory.length > 0">
+      <div class="chat-message" *ngFor="let msg of chatHistory" [ngClass]="msg.role">
+        <strong>{{ msg.role === 'user' ? 'Você' : 'Assistente' }}</strong>
+        <div class="msg-text">{{ msg.text }}</div>
+      </div>
+    </div>
+    
+    <div class="empty-state" *ngIf="chatHistory.length === 0">
+      <p>Nenhuma mensagem ainda.</p>
+      <p class="suggestions">
+        Ex:<br>
+        <i>"Qual o veículo com maior carga?"</i><br>
+        <i>"O SLA das prioridades foi atendido?"</i>
+      </p>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <div class="qa-input-group">
+      <input 
+        type="text" 
+        [(ngModel)]="question" 
+        placeholder="Faça uma pergunta..."
+        [disabled]="isAsking"
+        (keyup.enter)="askQuestion()"
+      />
+      <button class="btn-secondary" (click)="askQuestion()" [disabled]="!question.trim() || isAsking">
+        <span *ngIf="!isAsking">Enviar</span>
+        <span *ngIf="isAsking">...</span>
+      </button>
+    </div>
+  </div>
+</div>
