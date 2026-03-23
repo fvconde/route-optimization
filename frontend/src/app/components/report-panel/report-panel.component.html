@@ -14,31 +14,6 @@
       {{ reportText }}
     </div>
 
-    <div class="qa-section">
-      <h3>Faça perguntas ao Assistente</h3>
-      <p>Você pode tirar dúvidas específicas sobre gastos, rotas críticas ou comparar pontuações.</p>
-      
-      <div class="chat-history" *ngIf="chatHistory.length > 0">
-        <div class="chat-message" *ngFor="let msg of chatHistory" [ngClass]="msg.role">
-          <strong>{{ msg.role === 'user' ? 'Você' : 'Assistente' }}:</strong>
-          <div class="msg-text">{{ msg.text }}</div>
-        </div>
-      </div>
-
-      <div class="qa-input-group">
-        <input 
-          type="text" 
-          [(ngModel)]="question" 
-          placeholder="Ex: Qual carregamento está mais pesado e em qual veículo?"
-          [disabled]="isAsking || isGenerating"
-          (keyup.enter)="askQuestion()"
-        />
-        <button class="btn-secondary" (click)="askQuestion()" [disabled]="!question.trim() || isAsking || isGenerating">
-          <span *ngIf="!isAsking">Perguntar</span>
-          <span *ngIf="isAsking">Analisando...</span>
-        </button>
-      </div>
-    </div>
   </div>
 
   <div class="error-slate" *ngIf="error" style="margin-top: 1rem;">

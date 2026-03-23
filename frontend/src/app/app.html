@@ -58,5 +58,9 @@
         </div>
       </ng-template>
     </main>
+    
+    <aside class="right-sidebar">
+      <app-chat-sidebar *ngIf="result" [result]="result"></app-chat-sidebar>
+    </aside>
   </div>
 </div>
