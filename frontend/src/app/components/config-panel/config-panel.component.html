@@ -25,7 +25,10 @@
       <label for="max_distance">Autonomia (km)</label>
       <input type="number" id="max_distance" name="max_distance" [(ngModel)]="max_distance" required min="1">
     </div>
-    <button type="submit" class="btn-primary">Iniciar Otimização</button>
+    <button type="submit" class="btn-primary" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Iniciar Otimização</span>
+      <span *ngIf="isLoading">Calculando Rotas...</span>
+    </button>
   </form>
 
   <div class="penalties-info">

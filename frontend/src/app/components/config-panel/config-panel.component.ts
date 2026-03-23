@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OptimizeRequest } from '../../models/optimize-request';
@@ -18,6 +18,7 @@ export class ConfigPanelComponent {
   max_capacity: number = 100;
   max_distance: number = 300;
 
+  @Input() isLoading: boolean = false;
   @Output() optimize = new EventEmitter<OptimizeRequest>();
 
   onSubmit() {

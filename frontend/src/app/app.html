@@ -5,7 +5,7 @@
 
   <div class="main-content">
     <aside class="sidebar">
-      <app-config-panel (optimize)="onOptimize($event)"></app-config-panel>
+      <app-config-panel [isLoading]="isLoading" (optimize)="onOptimize($event)"></app-config-panel>
       
       <div *ngIf="isLoading" class="loading-state">
         <div class="spinner"></div>
