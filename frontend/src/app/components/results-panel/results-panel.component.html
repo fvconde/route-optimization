@@ -32,6 +32,14 @@
       <span class="metric-value">{{ numVehicles }}</span>
     </div>
   </div>
+
+  <div class="route-details" *ngIf="result.routes && result.routes.length > 0">
+    <h3>Sequência de Pontos Atendidos</h3>
+    <div *ngFor="let route of result.routes; let i = index" class="route-box">
+      <strong>Veículo {{ i + 1 }}:</strong>
+      <code>[ {{ route.join(', ') }} ]</code>
+    </div>
+  </div>
 </div>
 
 <ng-template #noData>
