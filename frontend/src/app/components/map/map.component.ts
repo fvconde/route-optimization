@@ -14,7 +14,7 @@ export class MapComponent implements OnChanges {
   @Input() routes: number[][] = [];
   @ViewChild('mapCanvas') mapCanvas!: ElementRef<HTMLCanvasElement>;
 
-  private readonly vehicleColors = ['#007bff', '#6610f2', '#e83e8c', '#fd7e14', '#20c997', '#17a2b8'];
+  readonly vehicleColors = ['#007bff', '#6610f2', '#e83e8c', '#fd7e14', '#20c997', '#17a2b8'];
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.points && this.routes) {

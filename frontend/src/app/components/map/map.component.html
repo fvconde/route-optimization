@@ -6,6 +6,14 @@
     <span class="legend-item"><span class="dot p2"></span> Prioridade Média (2)</span>
     <span class="legend-item"><span class="dot p1"></span> Prioridade Baixa (1)</span>
   </div>
+  
+  <div class="legend vehicle-legend" *ngIf="routes && routes.length > 0">
+    <span class="legend-item" *ngFor="let route of routes; let i = index">
+      <span class="line-color" [style.backgroundColor]="vehicleColors[i % vehicleColors.length]"></span>
+      Veículo {{ i + 1 }}
+    </span>
+  </div>
+
   <div class="canvas-container">
     <canvas #mapCanvas></canvas>
   </div>

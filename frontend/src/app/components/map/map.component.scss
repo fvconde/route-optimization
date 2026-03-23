@@ -39,6 +39,19 @@
     }
   }
 
+  .vehicle-legend {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #eaeaea;
+
+    .line-color {
+      width: 16px;
+      height: 4px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+  }
+
   .canvas-container {
     width: 100%;
     overflow: hidden;
