@@ -1,12 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { OptimizeResponse } from '../../models/optimize-response';
 import { ApiService } from '../../services/api.service';
+
+interface ChatMessage {
+  role: 'user' | 'assistant';
+  text: string;
+}
 
 @Component({
   selector: 'app-report-panel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './report-panel.component.html',
   styleUrl: './report-panel.component.scss'
 })
@@ -16,6 +22,10 @@ export class ReportPanelComponent {
   isGenerating = false;
   reportText: string | null = null;
   error: string | null = null;
+
+  question: string = '';
+  isAsking = false;
+  chatHistory: ChatMessage[] = [];
 
   constructor(private apiService: ApiService) {}
 
@@ -35,6 +45,29 @@ export class ReportPanelComponent {
         console.error('Error generating report:', err);
         this.error = 'Falha ao gerar o relatório. Verifique se a chave OPENAI_API_KEY está configurada no backend.';
         this.isGenerating = false;
+      }
+    });
+  }
+
+  askQuestion() {
+    if (!this.result || !this.question.trim()) return;
+
+    const userQ = this.question.trim();
+    this.chatHistory.push({ role: 'user', text: userQ });
+    this.question = '';
+    this.isAsking = true;
+
+    const payload = { ...this.result, question: userQ };
+
+    this.apiService.generateReport(payload).subscribe({
+      next: (res) => {
+        this.chatHistory.push({ role: 'assistant', text: res.report });
+        this.isAsking = false;
+      },
+      error: (err) => {
+        console.error('Error asking question:', err);
+        this.chatHistory.push({ role: 'assistant', text: 'Desculpe, ocorreu um erro ao processar sua pergunta.' });
+        this.isAsking = false;
       }
     });
   }
