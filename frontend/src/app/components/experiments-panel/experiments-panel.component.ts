@@ -46,6 +46,7 @@ export class ExperimentsPanelComponent implements OnDestroy {
     const baseSpeed = this.request.speed_kmh;
     const baseCapacity = this.request.max_capacity || 100;
     const baseDistance = this.request.max_distance || 300;
+    const seed = Math.floor(Math.random() * 1000000);
 
     const requests: Observable<OptimizeResponse>[] = scenarios.map(gen => {
       const req: OptimizeRequest = {
@@ -54,7 +55,8 @@ export class ExperimentsPanelComponent implements OnDestroy {
         vehicles: baseVehicles,
         speed_kmh: baseSpeed,
         max_capacity: baseCapacity,
-        max_distance: baseDistance
+        max_distance: baseDistance,
+        seed: seed
       };
       return this.apiService.optimize(req);
     });

@@ -12,11 +12,19 @@ class OptimizeRequest(BaseModel):
     speed_kmh: float = 60
     max_capacity: int = 100
     max_distance: int = 300
+    seed: int | None = None
 
 router = APIRouter()
 
+import random
+
 @router.post("/optimize")
 def optimize(data: OptimizeRequest):
+    if data.seed is not None:
+        random.seed(data.seed)
+    else:
+        random.seed()
+        
     points = generate_points(data.points)
 
     routes, history, dist = run_ga(
