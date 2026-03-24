@@ -3,15 +3,9 @@ import numpy as np
 from tsp import total_distance, distance
 from constraints import priority_penalty, time_penalty
 
-
-import random
-import numpy as np
-from tsp import total_distance, distance
-from constraints import priority_penalty, time_penalty
-
 def split_routes(customers, vehicles, depot):
     splits = np.array_split(customers, vehicles)
-    return [[depot] + s.tolist() + [depot] for s in splits if len(s) > 0]
+    return [[depot.copy()] + s.tolist() + [depot.copy()] for s in splits if len(s) > 0]
 
 def fitness(customers, vehicles, depot, speed_kmh=60, max_capacity=100, max_distance=300):
     routes = split_routes(customers, vehicles, depot)
@@ -64,8 +58,10 @@ def run_ga(points, generations=100, vehicles=1, speed_kmh=60, max_capacity=100, 
     history = []
 
     for _ in range(generations):
-        new_pop = []
-        for _ in range(len(pop)):
+        best_current = min(pop, key=lambda r: fitness(r, vehicles, depot, speed_kmh, max_capacity, max_distance))
+        new_pop = [best_current]
+        
+        for _ in range(len(pop) - 1):
             p1 = selection(pop, vehicles, depot, speed_kmh, max_capacity, max_distance)
             p2 = selection(pop, vehicles, depot, speed_kmh, max_capacity, max_distance)
 
