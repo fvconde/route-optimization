@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-O presente projeto tem como foco a resolução de um problema de roteamento logístico aplicado a um cenário crítico: a distribuição hospitalar. A logística hospitalar demanda não apenas minimizar a distância percorrida pela frota, mas garantir rigorosamente o cumprimento de Janelas de Tempo (SLA) para entregas urgentes, garantindo a integridade de insumos críticos.
+O presente projeto tem como foco a resolução de um problema de roteamento logístico aplicado a um cenário crítico: a distribuição hospitalar. A implementação foi baseada no código introdutório de TSP fornecido pela FIAP. A logística hospitalar demanda não apenas minimizar a distância percorrida pela frota, mas garantir rigorosamente o cumprimento de Janelas de Tempo (SLA) para entregas urgentes, garantindo a integridade de insumos críticos.
 
 O objetivo deste projeto foi o desenvolvimento de um sistema completo que utiliza um **Algoritmo Genético (GA)** para resolver variantes complexas do **Problema do Caixeiro Viajante (TSP)** e **Problema de Roteamento de Veículos (VRP)**, aplicando restrições operacionais rígidas do mundo real.
 
