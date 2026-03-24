@@ -1,0 +1,49 @@
+<div class="results-panel" *ngIf="result; else noData">
+  <h2>Resultados da Otimização</h2>
+  
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="metric-label">Fitness Inicial</span>
+      <span class="metric-value">{{ initialFitness | number:'1.2-2' }} km</span>
+    </div>
+
+    <div class="metric-card">
+      <span class="metric-label">Fitness Final</span>
+      <span class="metric-value">{{ finalFitness | number:'1.2-2' }} km</span>
+    </div>
+
+    <div class="metric-card">
+      <span class="metric-label">Melhoria Total</span>
+      <span class="metric-value">{{ totalImprovement | number:'1.2-2' }} km</span>
+    </div>
+
+    <div class="metric-card">
+      <span class="metric-label">Melhoria %</span>
+      <span class="metric-value text-success">{{ improvementPercent | number:'1.2-2' }}%</span>
+    </div>
+    
+    <div class="metric-card">
+      <span class="metric-label">Tempo Estimado</span>
+      <span class="metric-value">{{ result.estimated_time_h | number:'1.2-2' }} h</span>
+    </div>
+    
+    <div class="metric-card">
+      <span class="metric-label">Veículos Utilizados</span>
+      <span class="metric-value">{{ numVehicles }}</span>
+    </div>
+  </div>
+
+  <div class="route-details" *ngIf="result.routes && result.routes.length > 0">
+    <h3>Sequência de Pontos Atendidos</h3>
+    <div *ngFor="let route of result.routes; let i = index" class="route-box">
+      <strong>Veículo {{ i + 1 }}:</strong>
+      <code>[ {{ route.join(', ') }} ]</code>
+    </div>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="results-panel empty">
+    <p>Preencha os parâmetros e clique em "Iniciar Otimização" para ver os resultados.</p>
+  </div>
+</ng-template>

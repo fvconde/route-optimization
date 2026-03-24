@@ -1,0 +1,46 @@
+<div class="config-panel">
+  <h2>Configuração</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="points">Pontos de Entrega</label>
+      <input type="number" id="points" name="points" [(ngModel)]="points" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="generations">Gerações</label>
+      <input type="number" id="generations" name="generations" [(ngModel)]="generations" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="vehicles">Veículos</label>
+      <input type="number" id="vehicles" name="vehicles" [(ngModel)]="vehicles" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="speed_kmh">Velocidade (km/h)</label>
+      <input type="number" id="speed_kmh" name="speed_kmh" [(ngModel)]="speed_kmh" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="max_capacity">Capacidade Máxima</label>
+      <input type="number" id="max_capacity" name="max_capacity" [(ngModel)]="max_capacity" required min="1">
+    </div>
+    <div class="form-group">
+      <label for="max_distance">Autonomia (km)</label>
+      <input type="number" id="max_distance" name="max_distance" [(ngModel)]="max_distance" required min="1">
+    </div>
+    <button type="submit" class="btn-primary" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Iniciar Otimização</span>
+      <span *ngIf="isLoading">Calculando Rotas...</span>
+    </button>
+  </form>
+
+  <div class="penalties-info">
+    <h3>Como funciona a otimização?</h3>
+    <p>O algoritmo genético avalia e penaliza as rotas com base nas seguintes restrições operacionais:</p>
+    <ul>
+      <li><strong>Distância Total:</strong> Busca a rota VRP mais curta agregada para os veículos.</li>
+      <li><strong>Capacidade Máxima:</strong> Penaliza veículos sobrecarregados (peso/volume).</li>
+      <li><strong>Autonomia:</strong> Penaliza fortemente se a distância exceder o limite do veículo.</li>
+      <li><strong>Janelas de Tempo (SLA):</strong> Punição se a entrega atrasar com base em sua prioridade.</li>
+      <li><strong>Horário Comercial:</strong> Punição drástica se a rota avançar além das 18:00h.</li>
+      <li><strong>Prioridade de Entregas:</strong> Penaliza se entregas urgentes forem movidas para o fim da fila.</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="panel">
+  <h2>Experimentos</h2>
+  <p class="description">Execute múltiplos cenários variando o número de gerações do algoritmo genético para comparar a evolução do fitness (custo) e o tempo computacional.</p>
+  
+  <div class="actions">
+    <button class="btn-primary" (click)="runExperiments()" [disabled]="!request || isLoading">
+      <span *ngIf="!isLoading">Rodar Experimentos (50, 100, 200)</span>
+      <span *ngIf="isLoading">Executando...</span>
+    </button>
+  </div>
+
+  <div class="results-area" *ngIf="hasRun">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Execução</th>
+            <th>Gerações</th>
+            <th>Custo Final (Distância km)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exp of experiments">
+            <td>#{{ exp.execution }}</td>
+            <td>{{ exp.generations }}</td>
+            <td><strong>{{ exp.distance | number:'1.2-2' }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-container" style="position: relative; height:350px; width:100%; margin-top:2rem;">
+      <canvas #experimentsChart></canvas>
+    </div>
+  </div>
+</div>

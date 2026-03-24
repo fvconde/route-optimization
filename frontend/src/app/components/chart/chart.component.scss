@@ -1,0 +1,19 @@
+.chart-panel {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .canvas-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+}
