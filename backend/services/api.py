@@ -4,6 +4,7 @@ from tsp import generate_points
 from pydantic import BaseModel
 from services.llm_service import generate_report
 from fastapi import HTTPException
+import random
 
 class OptimizeRequest(BaseModel):
     points: int = 20
@@ -15,8 +16,6 @@ class OptimizeRequest(BaseModel):
     seed: int | None = None
 
 router = APIRouter()
-
-import random
 
 @router.post("/optimize")
 def optimize(data: OptimizeRequest):
