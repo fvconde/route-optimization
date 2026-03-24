@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OptimizeResponse } from '../../models/optimize-response';
@@ -16,8 +16,22 @@ interface ChatMessage {
   templateUrl: './report-panel.component.html',
   styleUrl: './report-panel.component.scss'
 })
-export class ReportPanelComponent {
+export class ReportPanelComponent implements OnChanges {
   @Input() result: OptimizeResponse | null = null;
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['result'] && !changes['result'].isFirstChange()) {
+      // Limpa o relatório apenas quando um novo resultado (nova otimização) chega
+      if (this.result) {
+        this.reportText = null;
+        this.chatHistory = [];
+        this.question = '';
+        this.error = null;
+        this.isGenerating = false;
+        this.isAsking = false;
+      }
+    }
+  }
   
   isGenerating = false;
   reportText: string | null = null;

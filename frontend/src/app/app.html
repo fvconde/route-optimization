@@ -47,7 +47,7 @@
           <app-analytics-panel [result]="result"></app-analytics-panel>
         </div>
 
-        <div *ngIf="activeTab === 'relatorio'">
+        <div [hidden]="activeTab !== 'relatorio'">
           <app-report-panel [result]="result"></app-report-panel>
         </div>
       </div>

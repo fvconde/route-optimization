@@ -36,6 +36,20 @@ def _build_context(data: dict) -> str:
                     priority = p.get('priority', 'N/A')
                     demand = p.get('demand', 'N/A')
                     context += f"  - Ponto {p_id} | Prioridade (1=baixa, 3=alta): {priority} | Demanda: {demand}\n"
+                    
+    context += """
+    REGRAS DE PENALIDADE DO SISTEMA (Restrições Operacionais):
+    - Capacidade Máxima do Veículo: Excesso de carga penaliza o fitness severamente.
+    - Distância Máxima por Rota: Otimizada para não exceder limites logísticos.
+    - SLA de Posição na Rota: Prioridade 3 deve estar idealmente até a 3ª parada. Prioridade 2 até a 6ª parada.
+    - SLA de Tempo (Início às 08:00):
+        - Prioridade 3: Limite máximo tolerado é 10:00 (2h de percurso).
+        - Prioridade 2: Limite máximo tolerado é 12:00 (4h de percurso).
+        - Prioridade 1: Limite máximo tolerado é 16:00 (8h de percurso).
+    - Horário Comercial: Nenhuma entrega deve ocorrer após as 18:00 (10h de percurso).
+    
+    Por favor, utilize estas regras como contexto para justificar e analisar o formato das rotas, identificando por que certos nós puderam ser priorizados geograficamente de forma contra-intuitiva devido a SLAs de tempo ou prioridade.
+    """
     
     return context
 

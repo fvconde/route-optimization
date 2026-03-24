@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OptimizeResponse } from '../../models/optimize-response';
@@ -15,8 +15,18 @@ interface ChatMessage {
   templateUrl: './chat-sidebar.html',
   styleUrl: './chat-sidebar.scss'
 })
-export class ChatSidebar {
+export class ChatSidebar implements OnChanges {
   @Input() result: OptimizeResponse | null = null;
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['result'] && !changes['result'].isFirstChange()) {
+      if (this.result) {
+        this.chatHistory = [];
+        this.question = '';
+        this.isAsking = false;
+      }
+    }
+  }
   
   question: string = '';
   isAsking = false;
